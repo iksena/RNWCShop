@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ShopContainer from '../Containers/Shop/Shop.container';
 import CartContainer from '../Containers/Cart/Cart.container';
 import DetailContainer from '../Containers/Detail/Detail.container';
+import CheckoutContainer from '../Containers/Checkout/Checkout.container';
 
 export const routes = {
   Browse: 'Browse',
@@ -17,10 +18,13 @@ export const routes = {
 };
 
 export type NavigationParams = {
+  Browse: any;
+  Shop: any;
   Detail: {
     id: number;
   };
   Orders: any;
+  Cart: any;
   Checkout: any;
 };
 
@@ -37,7 +41,7 @@ const Browse = (): JSX.Element => (
 const Orders = (): JSX.Element => (
   <Stack.Navigator initialRouteName={routes.Cart}>
     <Stack.Screen name={routes.Cart} component={CartContainer} />
-    <Stack.Screen name={routes.Checkout} component={() => <></>} />
+    <Stack.Screen name={routes.Checkout} component={CheckoutContainer} />
   </Stack.Navigator>
 );
 
