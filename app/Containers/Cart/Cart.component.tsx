@@ -13,6 +13,7 @@ import ProductItem, {
   CartItem,
   Product
 } from '../../Components/ProductItem/ProductItem.component';
+import { toAmount } from '../../Utils';
 
 interface Props {
   products: Array<CartItem>;
@@ -26,11 +27,6 @@ interface Props {
   resetCart: () => void;
 }
 
-const _toAmount = (amount: number): string =>
-  new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(
-    amount
-  );
-
 const _renderProduct = (props: Props) => ({
   item
 }: {
@@ -43,7 +39,7 @@ const _renderEmpty = (): JSX.Element => (
   <Text style={styles.textEmpty}>There is no item in your cart</Text>
 );
 
-const Browse = (props: Props): JSX.Element => {
+const Cart = (props: Props): JSX.Element => {
   const { products, resetCart, total, handleCheckoutPress } = props;
 
   return (
@@ -54,11 +50,11 @@ const Browse = (props: Props): JSX.Element => {
             reverse
             name="trash-alt"
             type="font-awesome-5"
-            onPress={(): void => resetCart()}
+            onPress={resetCart}
           />
-          <Text style={styles.textTotal}>{`Total:\n${_toAmount(total)}`}</Text>
+          <Text style={styles.textTotal}>{`Total:\n${toAmount(total)}`}</Text>
         </View>
-        <Button title="Checkout" onPress={(): void => handleCheckoutPress()} />
+        <Button title="Checkout" onPress={handleCheckoutPress} />
       </View>
       <FlatList
         contentContainerStyle={styles.container}
@@ -115,4 +111,4 @@ const styles = StyleSheet.create<Styles>({
   }
 });
 
-export default Browse;
+export default Cart;
