@@ -5,23 +5,29 @@ import {
   Text,
   TouchableOpacity,
   View,
-  ViewStyle,
+  ViewStyle
 } from 'react-native';
-import {Button, Card, Icon, Rating} from 'react-native-elements';
+import { Button, Card, Icon, Rating } from 'react-native-elements';
 import HTML from 'react-native-render-html';
 
-const {width: screenWidth} = Dimensions.get('window');
+import { toAmount } from '../../Utils';
+
+const { width: screenWidth } = Dimensions.get('window');
 
 interface Props {
   product: Product;
   handleProductPress: (id: number) => void;
 }
 
+export interface Image {
+  src: string;
+}
+
 export interface Product {
   id: number;
   name: string;
   price: number;
-  images: Array<{src: string}>;
+  images: Array<Image>;
   description: string;
   average_rating: string;
 }
@@ -33,7 +39,7 @@ export interface CartItem extends Product {
 interface Props {
   product: Product;
   handleProductPress: (id: number) => void;
-  isInCart?: boolean;
+  isInCart: boolean;
   addToCart?: (product: Product) => void;
   removeFromCart?: (id: number) => void;
   addQuantity?: (id: number) => void;
@@ -41,17 +47,14 @@ interface Props {
   quantity?: number;
 }
 
-const _toAmount = (amount: number): string =>
-  new Intl.NumberFormat('id-ID', {style: 'currency', currency: 'IDR'}).format(
-    amount,
-  );
+const noop = () => {};
 
 const _renderCartDetail = ({
   product,
   quantity = 0,
-  subQuantity,
-  addQuantity,
-  removeFromCart,
+  subQuantity = noop,
+  addQuantity = noop,
+  removeFromCart = noop
 }: Props): JSX.Element => (
   <>
     <View style={styles.actionView}>
@@ -71,7 +74,10 @@ const _renderCartDetail = ({
   </>
 );
 
-const _renderBrowseDetail = ({product, addToCart}: Props): JSX.Element => (
+const _renderBrowseDetail = ({
+  product,
+  addToCart = noop
+}: Props): JSX.Element => (
   <>
     <HTML
       html={product.description}
@@ -79,7 +85,7 @@ const _renderBrowseDetail = ({product, addToCart}: Props): JSX.Element => (
       renderers={{
         p: (_: never, children: Array<string>): JSX.Element => (
           <Text numberOfLines={2}>{children}</Text>
-        ),
+        )
       }}
     />
     <View style={styles.actionView}>
@@ -95,7 +101,7 @@ const _renderBrowseDetail = ({product, addToCart}: Props): JSX.Element => (
           name: 'cart-plus',
           type: 'font-awesome-5',
           color: 'white',
-          size: 16,
+          size: 16
         }}
         onPress={(): void => addToCart(product)}
       />
@@ -109,10 +115,10 @@ const ProductItem = (props: Props): JSX.Element => {
       id,
       name,
       images: [image],
-      price,
+      price
     },
     handleProductPress,
-    isInCart = false,
+    isInCart = false
   } = props;
 
   return (
@@ -121,9 +127,9 @@ const ProductItem = (props: Props): JSX.Element => {
         title={name}
         // @ts-ignore
         titleNumberOfLines={2}
-        image={{uri: image.src}}
+        image={{ uri: image.src }}
         containerStyle={styles.card}>
-        <Text>{_toAmount(price)}</Text>
+        <Text>{toAmount(price)}</Text>
         {isInCart ? _renderCartDetail(props) : _renderBrowseDetail(props)}
       </Card>
     </TouchableOpacity>
@@ -139,17 +145,17 @@ interface Styles {
 const styles = StyleSheet.create<Styles>({
   card: {
     width: screenWidth / 2 - 20,
-    margin: 10,
+    margin: 10
   },
   actionView: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginVertical: 5,
+    marginVertical: 5
   },
   rating: {
-    paddingVertical: 5,
-  },
+    paddingVertical: 5
+  }
 });
 
 export default ProductItem;
