@@ -21,7 +21,7 @@ const _getOAuth = (): OAuth =>
       Base64.stringify(hmacSHA1(baseString, key))
   });
 
-const get = async (path: string): Promise<AxiosResponse<object>> => {
+const get = async (path: string): Promise<AxiosResponse> => {
   const request = {
     url: `${config.WC_BASE_URL}${config.WC_API_URL}${path}`,
     method: 'GET'
@@ -31,10 +31,7 @@ const get = async (path: string): Promise<AxiosResponse<object>> => {
   return axios.get(request.url, { params: oauth });
 };
 
-const post = async (
-  path: string,
-  body: object
-): Promise<AxiosResponse<object>> => {
+const post = async (path: string, body: object): Promise<AxiosResponse> => {
   const request = {
     url: `${config.WC_BASE_URL}${config.WC_API_URL}${path}`,
     method: 'POST'

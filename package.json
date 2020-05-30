@@ -8,29 +8,43 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "postinstall": "./node_modules/.bin/rn-nodeify --install \"crypto,vm,stream\" --hack"
+    "postinstall": "./node_modules/.bin/rn-nodeify --install \"crypto,vm,stream,process\" --hack --yarn"
   },
   "dependencies": {
+    "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/bottom-tabs": "^5.5.0",
     "@react-navigation/native": "^5.4.3",
     "@react-navigation/stack": "^5.4.0",
     "@types/crypto-js": "^3.1.47",
     "@types/react-native-snap-carousel": "^3.8.1",
     "@types/react-redux": "^7.1.9",
+    "add": "^2.0.6",
     "axios": "^0.19.2",
     "crypto-js": "^4.0.0",
     "formik": "^2.1.4",
     "oauth-1.0a": "^2.2.6",
+    "process": "^0.11.0",
     "react": "16.11.0",
     "react-native": "0.62.2",
+    "react-native-crypto": "^2.2.0",
     "react-native-elements": "^2.0.0",
+    "react-native-gesture-handler": "^1.6.1",
     "react-native-image-zoom-viewer": "^3.0.1",
+    "react-native-randombytes": "^3.5.3",
+    "react-native-reanimated": "^1.9.0",
     "react-native-render-html": "^4.2.0",
+    "react-native-safe-area-context": "^2.0.3",
+    "react-native-screens": "^2.8.0",
     "react-native-snap-carousel": "^4.0.0-beta.3",
+    "react-native-vector-icons": "^6.6.0",
+    "react-native-webview": "^10.1.0",
     "react-redux": "^7.2.0",
+    "readable-stream": "^1.0.33",
     "redux": "^4.0.5",
     "rn-nodeify": "^10.2.0",
-    "vm-browserify": "0.0.4"
+    "stream-browserify": "^1.0.0",
+    "vm-browserify": "0.0.4",
+    "yarn": "^1.22.4"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
@@ -61,9 +75,23 @@
     ]
   },
   "react-native": {
-    "vm": "vm-browserify"
+    "vm": "vm-browserify",
+    "crypto": "react-native-crypto",
+    "_stream_transform": "readable-stream/transform",
+    "_stream_readable": "readable-stream/readable",
+    "_stream_writable": "readable-stream/writable",
+    "_stream_duplex": "readable-stream/duplex",
+    "_stream_passthrough": "readable-stream/passthrough",
+    "stream": "stream-browserify"
   },
   "browser": {
-    "vm": "vm-browserify"
+    "vm": "vm-browserify",
+    "crypto": "react-native-crypto",
+    "_stream_transform": "readable-stream/transform",
+    "_stream_readable": "readable-stream/readable",
+    "_stream_writable": "readable-stream/writable",
+    "_stream_duplex": "readable-stream/duplex",
+    "_stream_passthrough": "readable-stream/passthrough",
+    "stream": "stream-browserify"
   }
 }
