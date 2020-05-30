@@ -3,8 +3,9 @@ import { Icon } from 'react-native-elements';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import ShopContainer from '../Containers/Browse/Shop.container';
+import ShopContainer from '../Containers/Shop/Shop.container';
 import CartContainer from '../Containers/Cart/Cart.container';
+import DetailContainer from '../Containers/Detail/Detail.container';
 
 export const routes = {
   Browse: 'Browse',
@@ -15,13 +16,21 @@ export const routes = {
   Checkout: 'Checkout'
 };
 
+export type NavigationParams = {
+  Detail: {
+    id: number;
+  };
+  Orders: any;
+  Checkout: any;
+};
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const Browse = (): JSX.Element => (
   <Stack.Navigator initialRouteName={routes.Shop}>
     <Stack.Screen name={routes.Shop} component={ShopContainer} />
-    <Stack.Screen name={routes.Detail} component={() => <></>} />
+    <Stack.Screen name={routes.Detail} component={DetailContainer} />
   </Stack.Navigator>
 );
 
