@@ -4,10 +4,10 @@ import hmacSHA1 from 'crypto-js/hmac-sha1';
 import Base64 from 'crypto-js/enc-base64';
 
 export const config = {
-  WC_BASE_URL: 'http://localhost:8888',
+  WC_BASE_URL: 'http://localhost',
   WC_API_URL: '/wp-json/wc/v3',
-  WC_CONSUMER_KEY: 'ck_6e8324e82531cce36ad563d8c748bf0fb4d3f394',
-  WC_CONSUMER_SECRET: 'cs_7c1ca9c0b045c92c58e885d0a94a859eb70bfa3a'
+  WC_CONSUMER_KEY: 'ck_123',
+  WC_CONSUMER_SECRET: 'cs_123'
 };
 
 const _getOAuth = (): OAuth =>

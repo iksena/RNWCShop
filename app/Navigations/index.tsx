@@ -18,14 +18,16 @@ export const routes = {
 };
 
 export type NavigationParams = {
-  Browse: any;
-  Shop: any;
+  Browse: undefined;
+  Shop: undefined;
   Detail: {
     id: number;
   };
-  Orders: any;
-  Cart: any;
-  Checkout: any;
+  Orders: {
+    screen: string;
+  };
+  Cart: undefined;
+  Checkout: undefined;
 };
 
 const Stack = createStackNavigator();
